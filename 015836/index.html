@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>JavaScript Business Cards</title>
+  <link rel="stylesheet" href="../style.css" type="text/css">
+  <style>
+    #show-all {
+      margin-bottom:5px;
+    }
+    #all-cards {
+      margin-bottom:0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>JavaScript Business Cards</h1>
+  <div class="flex-content" style="display:flex;width:100%">
+  <div class="form-div" style="width: 50%;">
+  <h3>Add New Card</h3>
+  <form id="card-form" onSubmit="return false;">
+    Name: <input id="name" type="text" onkeypress="clickbutton(event)"><br>
+    Email: <input id="email" type="text" onkeypress="clickbutton(event)"><br>
+    Address: <input id="address" type="text" onkeypress="clickbutton(event)"><br>
+    Phone: <input id="phone" type="text" onkeypress="clickbutton(event)"><br>
+    Birthdate: <input id="birthdate" type="date" onkeypress="clickbutton(event)"><br>
+    <button id="form-submit" onSubmit="return false;">Submit</button>
+  </form>
+  </div>
+  <div id="cards-div" style="width: 50%;">
+  <label for=""></label><h3 name="all-cards" id="all-cards">All Cards</h3>
+  <button id="show-all">Show all</button>
+  <div id="end"></div>
+  </div>
+  </div>
+  <script type="text/javascript">
+    clickbutton = (event)=>{
+      if(event.keyCode===13) {
+        event.preventDefault();
+        document.getElementById("form-submit").click();
+      }
+    }
+  </script>
+  <script type="module" src="cards.js"> </script>
+  <script type="module" src="loops.js"> </script>
+</body>
+
+</html>

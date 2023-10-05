@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>tgperso chapter04</title>
+
+    <style>
+      html {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      body {
+        display: flex;
+        height: 100vh;
+        width: 75vh;
+        margin: 0;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .content {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+      }
+
+      .content p, .content button {
+        height: 4vh;
+        width: 6vh;
+        margin: 0 10%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .content button {
+        background-color: black;
+        color: white;
+      }
+
+      #color-cnt.content p, #inv-cnt.content p {
+        height: 60%;
+      }
+
+    </style>
+
+  </head>
+
+  <body >
+    <div class="content" id="top-label">
+      <p class="red-label">RED counter:</p>
+      <p class="green-label">GREEN counter:</p>
+      <p class="blue-label">BLUE counter:</p>
+    </div>
+
+    <div class="content" id="color-cnt">
+      <p id="red-color-count">0</p>
+      <p id="green-color-count">0</p>
+      <p id="blue-color-count">0</p>
+    </div>
+
+    <div class="content" id="buttons">
+      <button class="red">RED</button>
+      <button class="green">GREEN</button>
+      <button class="blue">BLUE</button>
+    </div>
+
+    <div class="content" id="bot-label">
+      <p class="red-label">Inverse Counter:</p>
+      <p class="green-label">Inverse Counter:</p>
+      <p class="blue-label">Inverse Counter:</p>
+    </div>
+
+    <div class="content" id="inv-cnt">
+      <p id="red-inv-count">0</p>
+      <p id="green-inv-count">0</p>
+      <p id="blue-inv-count">0</p>
+    </div>
+
+  </body>
+
+  <script>
+    function cbg() {
+      if (document.body.style.backgroundColor !== this.className) {
+        document.body.style.backgroundColor = this.className;
+        let count = document.getElementById(`${this.className}-color-count`);
+        count.innerHtml = count.innerHTML++;
+      }
+    }
+
+    function flipColor() {
+      this.style.backgroundColor === "black"?
+        this.style.backgroundColor = "white":
+        this.style.backgroundColor = "black";
+      this.style.color === "black"?
+        this.style.color = "white":
+        this.style.color = "black";
+      let count=document.getElementById(`${this.className}-inv-count`);
+      count.innerHtml=count.innerHTML++;
+    }
+
+    const buttons = document.getElementsByTagName("button")
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].onclick = cbg;
+      buttons[i].style.backgroundColor = "black";
+      buttons[i].style.color = "white";
+      buttons[i].onmouseover = flipColor;
+    }
+    
+  </script>
+
+</html>

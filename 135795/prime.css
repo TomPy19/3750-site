@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-container {
+  text-align: center;
+}
+
+.prime-list,
+.non-prime-list {
+  width: 45%;
+  padding: 10px;
+  border: 1px solid #4e4e4e;
+  margin: 10px;
+  transition: background-color 5s;
+}
+
+button {
+  display: block;
+  margin-top: 10px;
+  display: inline;
+}
+
+p.sum {
+  display: inline;
+  margin-left: 10px;
+}
