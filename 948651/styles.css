@@ -8,47 +8,48 @@
     font-style: normal;
 }
 
-* {
+.page-content * {
     box-sizing: border-box;
     font-family: Raleway;
     color: #777;
 }
 
-html, body {
+body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+    color: #777;
 }
 
-.nav ul {
+.page-content .nav ul {
     margin: 0;
 }
 
-.nav li {
+.page-content .nav li {
     display: inline;
 }
 
-.nav a {
+.page-content .nav a {
     display: inline-block;
     padding: .5em;
     color: white;
     text-decoration: none;
 }
 
-.main-nav {
+.page-content .main-nav {
     text-align: center;
     font-size: 1.1em;
 }
 
-.main-nav li {
+.page-content .main-nav li {
     padding: 0 5%;
 }
 
-.nav a:hover {
+.page-content .nav a:hover {
     background-color: rgba(255, 255, 255, .3)
 }
 
-.main-header {
+.page-content .main-header {
     background-color: rgba(0, 0, 0, .4);
     background-image: url("Images/Header Background.jpg");
     background-blend-mode: multiply;
@@ -56,7 +57,7 @@ html, body {
     padding: 15px 0;
 }
 
-.band-name {
+.page-content .band-name {
     text-align: center;
     margin: 0;
     font-size: 4em;
@@ -65,16 +66,16 @@ html, body {
     color: white;
 }
 
-.band-name-large {
+.page-content .band-name-large {
     font-size: 8em;
     padding: 30px 0;
 }
 
-.content-section {
+.page-content .content-section {
     margin: 1em;
 }
 
-.container {
+.page-content .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 1.5em;

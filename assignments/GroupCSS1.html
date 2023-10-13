@@ -1,70 +1,95 @@
-<!DOCTYPE html>
 <!--- Example of a Comment -->
+<!DOCTYPE html>
 <html>
-
-<style>
-  /* Example of a
-    Multi-line Comment*/
-
-  html {
-    background-color: indigo;
-    background-image: url("html.png");
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-size: 80px;
-    background-attachment: fixed;
-    color: burlywood;
-  }
-
-  .ex1 {
-    height: 2000px;
-  }
-
-  body {
-    background-image: url("html.png");
-    background-position: bottom left;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: 150px;
-  }
-
-  p.border {
-    border: 2px solid burlywood;
-  }
-
-  p.margin {
-    border: 2px solid burlywood;
-    margin: 50px;
-  }
-
-  p.padding {
-    border: 2px solid burlywood;
-    padding: 50px;
-  }
-
-  p.sizing {
-    border: 2px solid burlywood;
-    height: 50px;
-    width: 50%;
-  }
-
-</style>
-
 <head>
   <title>GroupCSS1</title>
-
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Example of a
+    Multi-line Comment*/
+    
+    body {
+      background-color: indigo;
+      height: 120vh;
+      margin: 0;
+    }
+    
+    .site-content {
+      height: 70%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      width: 70%;
+      flex-wrap: wrap;
+      margin: 8px;
+    }
+    
+    .ex2 {
+      background-color: indigo !important;
+      background-image: url("html.png");
+      background-position: top 70px right;
+      background-repeat: no-repeat;
+      background-size: 80px;
+      background-attachment: fixed;
+      color: burlywood !important;
+      position: relative;
+      height: 100%;
+      padding: 16px;
+    }
+    
+    .ex1 {
+      background-image: url("html.png");
+      background-position: bottom left;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-size: 150px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    p.border {
+      border: 2px solid burlywood;
+    }
+    
+    p.margin {
+      border: 2px solid burlywood;
+      margin: 50px !important;
+    }
+    
+    p.padding {
+      border: 2px solid burlywood;
+      padding: 50px !important;
+    }
+    
+    p.sizing {
+      border: 2px solid burlywood;
+      height: 50px !important;
+      width: 50% !important;
+      align-self: center;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="ex1">
-    <h1>This is h1 text.</h1>
-    <p class="border">This text has a border. Its style is solid, width is 2px, and color is burlywood.</p>
-    <p style="border-top: 2px solid burlywood">This text only has a top border.</p>
-    <p style="border-bottom: 2px solid burlywood">This text only has a bottom border.</p>
-    <p class="border" style="border-radius: 5px;">This text has a rounded border.</p>
-    <p class="margin">This text has a margin of 50px.</p>
-    <p class="padding">This text has a padding of 50px.</p>
-    <p class="sizing">This element has a height of 50px and a width of 50%.</p>
+  <!--#include virtual="../includes/header.html" -->
+  <div class="ex2">
+    <div class="ex1">
+      <h1>CSS Demo 1(This is h1 text.)</h1>
+      <div class="site-content">
+        <p class="border">This text has a border. Its style is solid, width is 2px, and color is burlywood.</p>
+        <p style="border-top: 2px solid burlywood">This text only has a top border.</p>
+        <p style="border-bottom: 2px solid burlywood">This text only has a bottom border.</p>
+        <p class="border" style="border-radius: 5px;">This text has a rounded border.</p>
+        <p class="margin">This text has a margin of 50px.</p>
+        <p class="padding">This text has a padding of 50px.</p>
+        <p class="sizing">This element has a height of 50px and a width of 50%.</p>
+      </div>
+    </div>
   </div>
 </body>
 

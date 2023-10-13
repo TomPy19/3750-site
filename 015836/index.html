@@ -7,87 +7,39 @@
   <link rel="stylesheet" href="../style.css" type="text/css">
   <style>
     #show-all {
-      margin-bottom:5px;
+      margin-bottom: 5px;
     }
+    
     #all-cards {
-      margin-bottom:0;
+      margin-bottom: 0;
     }
   </style>
-  <div class="wrapper">
-    <nav>
-      <input type="checkbox" id="show-search">
-      <input type="checkbox" id="show-menu">
-      <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
-      <div class="content">
-        <div class="logo"><a href="../">tgperso</a></div>
-        <ul class="links">
-          <li><a href="../">Home</a></li>
-          <li>
-            <a href="#" class="desktop-link">AI Content</a>
-            <input type="checkbox" id="show-features">
-            <label for="show-features">AI Content</label>
-            <ul>
-              <li><a href="../poems">AI Poems</a></li>
-              <li><a href="../art">AI Art</a></li>
-              <li><a href="../lyrics">AI Lyrics</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#" class="desktop-link">Assignments</a>
-            <input type="checkbox" id="show-features">
-            <label for="show-features">Assignments</label>
-            <ul>
-              <li><a href="#">Business Cards</a></li>
-              <li><a href="../135795/prime.html">Prime Numbers</a></li>
-              <li><a href="../435126/ButtonMove.html">Moving Buttons</a></li>
-              <li><a href="../495167/layout.html">Responsive Page</a></li>
-              <li><a href="../496548/chapter04.html">CSS Buttons</a></li>
-              <li><a href="../795483">Keypress Demo</a></li>
-              <li><a href="../914852">Sorting Demo</a></li>
-              <li><a href="../948651">Mock Store</a></li>
-              <li><a href="#" class="desktop-link">Group Assignments</a>
-                <input type="checkbox" id="show-items">
-                <label for="show-items">Group Assignments</label>
-                <ul>
-                  <li><a href="../assignments/GroupCSS1.html">Group CSS1</a></li>
-                  <li><a href="../assignments/GroupCSS2.html">Group CSS2</a></li>
-                  <li><a href="../assignments/GroupEvents.html">Group Events</a></li>
-                  <li><a href="../assignments/GroupAudio.html">Group Audio</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
-      </form>
-    </nav>
-  </div>
+  <!--#include virtual="../includes/header.html" -->
 </head>
 
 <body>
   <h1>JavaScript Business Cards</h1>
-  <div class="flex-content" style="display:flex;width:100%">
-  <div class="form-div" style="width: 50%;">
-  <h3>Add New Card</h3>
-  <form id="card-form" onSubmit="return false;">
-    Name: <input id="name" type="text" onkeypress="clickbutton(event)"><br>
-    Email: <input id="email" type="text" onkeypress="clickbutton(event)"><br>
-    Address: <input id="address" type="text" onkeypress="clickbutton(event)"><br>
-    Phone: <input id="phone" type="text" onkeypress="clickbutton(event)"><br>
-    Birthdate: <input id="birthdate" type="date" onkeypress="clickbutton(event)"><br>
-    <button id="form-submit" onSubmit="return false;">Submit</button>
-  </form>
-  </div>
-  <div id="cards-div" style="width: 50%;">
-  <label for=""></label><h3 name="all-cards" id="all-cards">All Cards</h3>
-  <button id="show-all">Show all</button>
-  <div id="end"></div>
-  </div>
+  <div class="wrapper-flex" style="display:flex;width:100%;justify-content:center;">
+    <div class="flex-content" style="display:flex;width:70%;justify-content:center;min-width: 800px;">
+      <div class="form-div" style="margin:8px;padding:5px;width:30%;border:1px solid bisque">
+        <h3>Add New Card</h3>
+        <form id="card-form" onSubmit="return false;">
+          Name: <input id="name" type="text" onkeypress="clickbutton(event)"><br> Email: <input id="email" type="text" onkeypress="clickbutton(event)"><br> Address: <input id="address" type="text" onkeypress="clickbutton(event)"><br> Phone: <input id="phone"
+            type="text" onkeypress="clickbutton(event)"><br> Birthdate: <input id="birthdate" type="date" onkeypress="clickbutton(event)"><br>
+          <button id="form-submit" onSubmit="return false;">Submit</button>
+        </form>
+      </div>
+      <div id="cards-div" style="margin:8px;padding:5px;width:30%;border:1px solid bisque">
+        <label for=""></label>
+        <h3 name="all-cards" id="all-cards">All Cards</h3>
+        <button id="show-all">Show all</button>
+        <div id="end"></div>
+      </div>
+    </div>
   </div>
   <script type="text/javascript">
-    clickbutton = (event)=>{
-      if(event.keyCode===13) {
+    clickbutton = (event) => {
+      if (event.keyCode === 13) {
         event.preventDefault();
         document.getElementById("form-submit").click();
       }
