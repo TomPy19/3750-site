@@ -24,17 +24,23 @@ if (!intval($_POST['cookie'])) {
 
 function writeToPages($num) {
   global $armFile, $fibFile, $primeFile, $noneFile;
-
+  $putInFile = false;
+  if ($num == "") {
+    return;
+  }
   if (isArmstrong($num)) {
     fwrite($armFile, $num."\n");
+    $putInFile = true;
   } 
   if (isFibonacci($num)) {
     fwrite($fibFile, $num."\n");
+    $putInFile = true;
   }
-  else if (isPrime($num)) {
+  if (isPrime($num)) {
     fwrite($primeFile, $num."\n");
+    $putInFile = true;
   } 
-  else {
+  if (!$putInFile) {
     fwrite($noneFile, $num."\n");
   }
 }
@@ -64,9 +70,13 @@ function isFibonacci($num) {
 }
 
 function isPrime($num){
-  if ($num == 1) return 0;
-  for ($i = 2; $i <= sqrt($num); $i++){
-    if ($num % $i == 0) return 0;
+  if ($num == 1) {
+    return 0;
+  }
+  for ($i = 2; $i <= $num/2; $i++) {
+    if ($num % $i == 0) {
+      return 0;
+    }
   }
   return 1;
 }
