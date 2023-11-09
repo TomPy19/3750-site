@@ -58,9 +58,15 @@ h3 {
 }
 
 a {
-  padding-right: 30px;
-  padding-left: 30px;
   color: bisque;
+}
+
+.body-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: 0 20px;
 }
 
 .art-flexbox {

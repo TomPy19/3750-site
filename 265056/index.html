@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Audio Player</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <script src="https://kit.fontawesome.com/cd8cff598a.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+  <!--#include virtual="../includes/header.html" -->
+</head>
+
+<body>
+  <h1>Audio Player</h1>
+  <audio id="audio-player" controls src="./assets/audio.mp3"></audio>
+  <div id="audio-controls">
+    <div id="audio-details">
+      <h2>Audio File: </h2>
+      <span id="audio-filename">WQUT 101.5 Johnson City, TN - 13 July 1989</span>
+      <h2>Current Time: <span id="current-time">0:00</span></h2>
+    </div>
+    <div id="audio-buttons">
+      <i class="fas fa-rotate-left" id="rewind-button"></i>
+      <i class="fas fa-play" id="play-pause-button"></i>
+      <i class="fas fa-rotate-right" id="forward-button"></i>
+    </div>
+    <div id="playlist-buttons">
+      <input type="text" name="item-text-input" id="item-text-input" placeholder="New entry...">
+      <i class="fas fa-plus" id="add-title-button"></i>
+    </div>
+    <ul id="playlist">
+      <!-- Playlist items will be added here -->
+    </ul>
+  </div>
+  <!--#include virtual="../includes/footer.html" -->
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../style.css">
+  <!--#include virtual="../includes/header.html"-->
+  <title>PHP I/O</title>
+</head>
+<body>
+  <h1 class="title">
+    PHP File I/O
+  </h1>
+  <br>
+  <p class="instructions">
+    Enter in a list of numbers numbers separated by commas.
+  </p>
+  <br>
+  <form id="numForm">
+    <input type="text" name="numInput" id="numInput">
+    <br>
+    <br>
+    <button type="submit">CHECK THESE NUMBERS</button>
+  </form>
+  <br>
+  <div class="four-btns">
+    <button id="armstrong-btn">ARMSTRONG</button>
+    <button id="fibonacci-btn">FIBONACCI</button>
+    <button id="prime-btn">PRIME</button>
+    <button id="none-btn">NONE</button>
+    <button id="reset-btn">RESET</button>
+  </div>
+  <div class="num-displays">
+    Click above buttons to view the data.
+    <div class="armstrong-display">
+
+    </div>
+    <div class="fibonacci-display">
+
+    </div>
+    <div class="prime-display">
+
+    </div>
+    <div class="none-display">
+
+    </div>
+  </div>
+</body>
+<script>
+  $(document).ready(function() {
+    // console.log(document.cookie.split(';')[0])
+    $('#numForm').on('submit', function(e) {
+      var cookie = 0;
+      // console.log(document.cookie)
+      if (document.cookie) {
+        cookie = 1;
+      } else {
+        setCookie('user', 'user', 365);
+      }
+      e.preventDefault();
+      $.post({
+        url: 'handler.php',
+        dataType: 'xml',
+        data: $(this).serialize()+'&btn=check&cookie='+cookie,
+        success: function(response) {
+          console.log($(response).find('response').text());
+        }
+      })
+    })
+
+    function setCookie(cname, cval, exdays) {
+      const date = new Date();
+      date.setTime(date.getTime()+(exdays*24*60*60*1000))
+      document.cookie = cname + '=' + cval + ";expires="+date.toUTCString();
+    }
+
+    $('#reset-btn').on('click', () => {
+      // document.cookie ? console.log('COOKIE DETECTED 😱'): console.log('We Chillin. 😎')
+      setCookie('user', '', -1);
+      $('#numForm').submit();
+      alert('Cookie deleted. 😎')
+    })
+  })
+</script>
+</html>
