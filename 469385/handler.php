@@ -1,13 +1,9 @@
 <?php
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(-1);
-
 header("Content-type: text/xml");
 echo "<?xml version=\"1.0\" ?>\n";
 echo "<response>";
 
-
+// If the cookie is not set, create new files. Otherwise, use existing files.
 if (!intval($_POST['cookie'])) {
   $armFile = fopen('./num-classes/armstrong.txt', 'w');
   $fibFile = fopen('./num-classes/fibonacci.txt', 'w');
@@ -22,6 +18,7 @@ if (!intval($_POST['cookie'])) {
   echo "Using existing files.\n";
 }
 
+// Write the number to the appropriate file.
 function writeToPages($num) {
   global $armFile, $fibFile, $primeFile, $noneFile;
   $putInFile = false;
@@ -45,6 +42,7 @@ function writeToPages($num) {
   }
 }
 
+// Check if the number is Armstrong
 function isArmstrong($num) {
   $armstrongNums = array(
     0,1,2,3,4,5,6,7,8,9,153,370,371,407,1634,8208,9474,54748,92727,93084,
@@ -57,6 +55,7 @@ function isArmstrong($num) {
   } return 0;
 }
 
+// Check if the number is Fibonacci
 function isFibonacci($num) {
   $temp = 5*$num*$num+4;
   if ((int)(sqrt($temp))*(int)(sqrt($temp))==$temp) {
@@ -69,6 +68,7 @@ function isFibonacci($num) {
   return 0;
 }
 
+// Check if the number is Prime
 function isPrime($num){
   if ($num == 1) {
     return 0;
@@ -81,6 +81,7 @@ function isPrime($num){
   return 1;
 }
 
+// Check if the numInput is set in the POST request.
 if (isset($_POST['numInput'])) {
   $nums = explode(',',$_POST['numInput']);
   foreach ($nums as $num) {
