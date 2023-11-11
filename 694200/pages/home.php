@@ -1,4 +1,4 @@
-/**
+<!-- /**
  * This file contains the HTML and JavaScript code for a manga search app.
  * The app allows users to search for manga titles and sort them by various criteria.
  * The app uses the AniList GraphQL API to fetch manga data.
@@ -15,7 +15,7 @@
  * - Display the total number of manga entries available on the AniList site
  * - Implement infinite scrolling to load more manga titles as the user scrolls down the page
  * - Display an "About" button that links to an about page for the app
- */
+ */ -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -201,6 +201,13 @@
   }
 
   $(document).ready(function() {
+    // Const declarations
+    const trendArr = Array("TRENDING_DESC","SCORE_DESC");
+    const searchForm = $('#search-form');
+
+    // Boolean to call function with double async
+    let isLoading = false;
+
     // JavaScript code to handle the about button.
     $('#about-btn').on('click', function() {
       window.location.href = `about`;
@@ -208,88 +215,6 @@
 
     // Hide search option
     $('#search-option').hide();
-    
-    // First query for stats
-    let query = `
-      query {
-        SiteStatistics {
-          manga (sort:[COUNT_DESC],perPage:1){
-            nodes {
-              count
-            }
-          }
-        }
-      }
-    `
-
-    // fetch stats
-    $.post({
-      url: 'https://graphql.anilist.co',
-      dataType: 'json',
-      data: {
-        query: query,
-        variables: {}
-      },
-      success: function(resp) {
-        $('#entries').text('Total Manga Entries: '+resp.data.SiteStatistics.manga.nodes[0].count);
-      }
-    })
-
-    // New query for manga list
-    query = `
-      query ($sortBy:[MediaSort],$search:String,$page:Int){
-        Page (page:$page,perPage:30) {
-          pageInfo {
-            total
-            currentPage
-            lastPage
-          }
-          media (type:MANGA,sort:$sortBy,isAdult:false,search:$search) {
-            id
-            title {
-              english
-              romaji
-            }
-            coverImage {
-              extraLarge
-            }
-          }
-        }
-      }
-    `
-
-    const trendArr = Array("TRENDING_DESC","SCORE_DESC");
-    const searchForm = $('#search-form');
-
-    // Handle search form submit
-    searchForm.on('submit', function(e) {
-      e.preventDefault();
-      $('#data').empty();
-      $('#search-option').show();
-      $('#sort-dropdown').val("SEARCH_MATCH");
-      apiQuery(sortBy="SEARCH_MATCH");
-    })
-
-    // Handle search form reset
-    if ($.cookie('sortBy')) {
-      if ($.cookie('searchTerm')) {
-        $('#search-field').val($.cookie('searchTerm'));
-      } else {
-        $('#sort-dropdown').val($.cookie('sortBy'));
-      }
-      apiQuery(sortBy=$.cookie('sortBy'));
-    } else {
-      $('#sort-dropdown').val("");
-      apiQuery(trendArr);
-    }
-
-    // Handle sort dropdown change
-    $('#sort-dropdown').on('change', function() {
-      $('#data').empty();
-      $('#search-field').val("");
-      $('#search-option').hide();
-      apiQuery(sortBy=$(this).val());
-    })
     
     // Function to query the API for manga
     function apiQuery(sortBy, page=1) {
@@ -348,9 +273,86 @@
         }
       })
     }
+    
+    // First create query string for stats
+    let query = `
+      query {
+        SiteStatistics {
+          manga (sort:[COUNT_DESC],perPage:1){
+            nodes {
+              count
+            }
+          }
+        }
+      }
+    `
 
-    // Boolean to call function with double async
-    let isLoading = false;
+    // Fetch stats from api using jquery ajax
+    $.post({
+      url: 'https://graphql.anilist.co',
+      dataType: 'json',
+      data: {
+        query: query,
+        variables: {}
+      },
+      success: function(resp) {
+        $('#entries').text('Total Manga Entries: '+resp.data.SiteStatistics.manga.nodes[0].count);
+      }
+    })
+
+    // New query string for manga list
+    query = `
+      query ($sortBy:[MediaSort],$search:String,$page:Int){
+        Page (page:$page,perPage:30) {
+          pageInfo {
+            total
+            currentPage
+            lastPage
+          }
+          media (type:MANGA,sort:$sortBy,isAdult:false,search:$search) {
+            id
+            title {
+              english
+              romaji
+            }
+            coverImage {
+              extraLarge
+            }
+          }
+        }
+      }
+    `
+
+    // Run query based on cookie info
+    if ($.cookie('sortBy')) {
+      if ($.cookie('searchTerm')) {
+        $('#search-field').val($.cookie('searchTerm'));
+      } else {
+        $('#sort-dropdown').val($.cookie('sortBy'));
+      }
+      apiQuery(sortBy=$.cookie('sortBy'));
+    } else {
+      $('#sort-dropdown').val("");
+      apiQuery(trendArr);
+    }
+
+    // Handle search form submit
+    searchForm.on('submit', function(e) {
+      e.preventDefault();
+      $('#data').empty();
+      $('#search-option').show();
+      $('#sort-dropdown').val("SEARCH_MATCH");
+      apiQuery(sortBy="SEARCH_MATCH");
+    })
+
+    // Handle sort dropdown change
+    $('#sort-dropdown').on('change', function() {
+      $('#data').empty();
+      $('#search-field').val("");
+      $('#search-option').hide();
+      apiQuery(sortBy=$(this).val());
+    })
+    
     // Handle infinite scrolling
     $(window).scroll(function() {
 
@@ -380,7 +382,6 @@
           }
         }
       }
-
     });
   });
 </script>

@@ -1,9 +1,11 @@
+<!--
 /**
  * This file displays information about a manga using data from the AniList API.
  * It uses Handlebars.js to create templates for the banner and manga information.
  * The information displayed includes the title, cover image, start and end dates, genres, average score, popularity, chapters, volumes, status, and description.
  * The back button allows the user to return to the previous page.
  */
+-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +60,7 @@
   </style>
 </head>
 <body>
-  // Banner handlebars template
+  <!-- Banner handlebars template -->
   <script id="banner-template" type="text/x-handlebars-template">
     {{#if bannerImage}}
     <div class="banner">
@@ -67,7 +69,7 @@
     {{/if}}
   </script>
     
-  // Manga handlebars template
+  <!-- Manga handlebars template -->
   <script id="manga-template" type="text/x-handlebars-template">
     <div class="body-content">
       {{#if title.english}}
@@ -96,8 +98,9 @@
   </script>
 </body>
 <script>
-  // Helper for checking if two values are equal
   $(document).ready(function() {
+
+    // Create equivalence helper
     Handlebars.registerHelper('equals', function(arg1, arg2) {
       return arg1 == arg2;
     });
@@ -105,7 +108,7 @@
     $.post({
       url: 'https://graphql.anilist.co',
       dataType: 'json',
-      data: {
+      data: { // different way of creating query string
         query: `
           query ($id: Int) {
             Media (id: $id, type: MANGA) {
@@ -128,8 +131,6 @@
               }
               coverImage {
                 extraLarge
-                large
-                medium
               }
               bannerImage
               genres
@@ -147,7 +148,7 @@
         }
       },
       success: function(response) {
-        console.log(response)
+        // Store data from response
         var data = response.data.Media
         var title = data.title
         var description = data.description
@@ -193,6 +194,7 @@
         }
         $('body').append(template(context))
         $('#description').html(description)
+        // Handle back button click
         $('#back-btn').click(function() {
           window.history.back();
         })

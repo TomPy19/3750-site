@@ -1,8 +1,8 @@
-/**
+<!-- /**
  * This script handles incoming requests and routes them to the appropriate page.
  * It expects a query string in the format of "?uri=<uri>&id=<id>".
  * The "uri" parameter specifies the page to display, and the "id" parameter is optional and specifies a specific item to display on that page.
- */
+ */ -->
  
 <?php
 // Parse the query string to get the requested URI and ID (if any)
