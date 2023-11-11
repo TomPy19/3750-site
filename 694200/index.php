@@ -14,4 +14,6 @@ if ($uri === '') {
   if (isset($id)) {
     require 'pages/manga.php';
   }
+} else if ($uri === "about") {
+  require 'pages/about.php';
 }

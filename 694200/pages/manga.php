@@ -13,9 +13,11 @@
     .body-content {
       display: flex;
       width: 70%;
+      max-width: 1000px;
       margin: 0 auto;
       flex-direction: column;
       align-items: center;
+      padding-bottom: 2.8rem;
     }
     .banner {
       width: 100%;
@@ -82,10 +84,6 @@
       {{/unless}}
       <br>
       <p id='description'></p>
-      <br>
-      <br>
-      <br>
-      <br>
     </div>
   </script>
 </body>
@@ -120,6 +118,7 @@
                 day
               }
               coverImage {
+                extraLarge
                 large
                 medium
               }
@@ -145,7 +144,7 @@
         var description = data.description
         var startDate = data.startDate
         var endDate = data.endDate
-        var coverImage = data.coverImage.large
+        var coverImage = data.coverImage.extraLarge
         var bannerImage = data.bannerImage
         var genres = data.genres
         var averageScore = data.averageScore

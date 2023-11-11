@@ -38,6 +38,7 @@
     span#entries {
       font-size: 1.5rem;
       margin: 1rem;
+      align-self: flex-end;
     }
     div.search {
       display: flex;
@@ -106,6 +107,18 @@
       opacity: 0.5;
       cursor: pointer;
     }
+    #about-btn {
+      font-weight: bold;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      margin-bottom: -3rem;
+      margin-left: 0rem;
+      border-radius: 5px;
+      border: none;
+      background-color: bisque;
+      cursor: pointer;
+      align-self: flex-start;
+    }
     @media screen and (max-width: 730px) {
       input#search-field {
         margin-left: 2.5rem;
@@ -120,6 +133,7 @@
 </head>
 <body>
   <div class="body-content">
+    <button id="about-btn">About</button>
     <span id="entries"></span>
     <div class="input-container">
       <div class="search">
@@ -163,6 +177,9 @@
     window.location.href = `manga/id/${id}`;
   }
   $(document).ready(function() {
+    $('#about-btn').on('click', function() {
+      window.location.href = `about`;
+    })
     $('#search-option').hide();
     let query = `
       query {
