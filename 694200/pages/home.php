@@ -132,6 +132,7 @@
   <title>Collect App</title>
 </head>
 <body>
+  <h1>Manga Search App</h1>
   <div class="body-content">
     <button id="about-btn">About</button>
     <span id="entries"></span>
