@@ -1,3 +1,10 @@
+/**
+ * This file contains the HTML and JavaScript code for the "About" page of the website.
+ * It includes links to external CSS and JavaScript files, as well as the Anilist API.
+ * The page displays information about the website and how to use it, and includes a "Back" button
+ * that allows the user to navigate to the previous page.
+ */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +49,7 @@
   </div>
 </body>
 <script>
+  // JavaScript code to handle the back button.
   $('#back-btn').click(function() {
     window.history.back();
   });

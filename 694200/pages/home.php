@@ -1,3 +1,22 @@
+/**
+ * This file contains the HTML and JavaScript code for a manga search app.
+ * The app allows users to search for manga titles and sort them by various criteria.
+ * The app uses the AniList GraphQL API to fetch manga data.
+ * The app also displays the total number of manga entries available on the AniList site.
+ * 
+ * The app uses Handlebars.js to dynamically generate HTML for the manga titles.
+ * The app also uses jQuery and jQuery Cookie plugins for DOM manipulation and cookie management.
+ * 
+ * The app has the following features:
+ * - Search for manga titles using a search field
+ * - Sort manga titles by various criteria using a dropdown menu
+ * - Display manga titles in a grid layout with cover images and titles
+ * - Click on a manga title to go to a details page for that title
+ * - Display the total number of manga entries available on the AniList site
+ * - Implement infinite scrolling to load more manga titles as the user scrolls down the page
+ * - Display an "About" button that links to an about page for the app
+ */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,6 +151,7 @@
   <title>Collect App</title>
 </head>
 <body>
+  <!-- Title -->
   <h1>Manga Search App</h1>
   <div class="body-content">
     <button id="about-btn">About</button>
@@ -143,6 +163,7 @@
           <button type="submit" id="search-btn"><i class="fas fa-search" style="position:relative;top: 1.5px;"></i></button>
         </form>
       </div>
+      <!-- Dropdown for sorting data -->
       <div class="sort">
         <label for="sort-dropdown">Sort By:</label>
         <select name="sort-dropdown" id="sort-dropdown">
@@ -167,21 +188,28 @@
   </div>
 </body>
 <script>
+  // JavaScript code to handle the single entry function and set cookie info.
   function clickHandler(id) {
     let sortBy = $('#sort-dropdown').val();
+    // 
     if ($('#search-field').val() != "") {
       sortBy = "SEARCH_MATCH";
       $.cookie('searchTerm', $('#search-field').val(), {path: '/'});
     }
     $.cookie('sortBy', sortBy, {path: '/'});
-    // console.log();
     window.location.href = `manga/id/${id}`;
   }
+
   $(document).ready(function() {
+    // JavaScript code to handle the about button.
     $('#about-btn').on('click', function() {
       window.location.href = `about`;
     })
+
+    // Hide search option
     $('#search-option').hide();
+    
+    // First query for stats
     let query = `
       query {
         SiteStatistics {
@@ -193,6 +221,8 @@
         }
       }
     `
+
+    // fetch stats
     $.post({
       url: 'https://graphql.anilist.co',
       dataType: 'json',
@@ -205,6 +235,7 @@
       }
     })
 
+    // New query for manga list
     query = `
       query ($sortBy:[MediaSort],$search:String,$page:Int){
         Page (page:$page,perPage:30) {
@@ -230,6 +261,7 @@
     const trendArr = Array("TRENDING_DESC","SCORE_DESC");
     const searchForm = $('#search-form');
 
+    // Handle search form submit
     searchForm.on('submit', function(e) {
       e.preventDefault();
       $('#data').empty();
@@ -238,19 +270,20 @@
       apiQuery(sortBy="SEARCH_MATCH");
     })
 
+    // Handle search form reset
     if ($.cookie('sortBy')) {
       if ($.cookie('searchTerm')) {
         $('#search-field').val($.cookie('searchTerm'));
       } else {
         $('#sort-dropdown').val($.cookie('sortBy'));
       }
-
       apiQuery(sortBy=$.cookie('sortBy'));
     } else {
       $('#sort-dropdown').val("");
       apiQuery(trendArr);
     }
 
+    // Handle sort dropdown change
     $('#sort-dropdown').on('change', function() {
       $('#data').empty();
       $('#search-field').val("");
@@ -258,6 +291,7 @@
       apiQuery(sortBy=$(this).val());
     })
     
+    // Function to query the API for manga
     function apiQuery(sortBy, page=1) {
       let searchTerm = "";
       let vars = {};
@@ -293,6 +327,8 @@
           if (curPage == 1) {
             $('#data').append('<div class="flex-grid"></div>')
           }
+
+          // Create Handlebars template
           let template = Handlebars.compile(`
             {{#each media}}
               <div class="flex-item">
@@ -313,18 +349,17 @@
       })
     }
 
+    // Boolean to call function with double async
     let isLoading = false;
-    // if user scrolls to bottom, load 20 more entries
+    // Handle infinite scrolling
     $(window).scroll(function() {
-      // console.log('Scroll event triggered');
-      // console.log('scrollTop:', $(window).scrollTop());
-      // console.log('window height:', $(window).height());
-      // console.log('document height:', $(document).height()-50);
 
+      // Second async layer
       if (isLoading) {
         return;
       }
 
+      // Check if at bottom of page
       if($(window).scrollTop() + $(window).height() >= $(document).height()-50) {
         console.log('Reached bottom of page');
         let currentPage = parseInt($('#page').text());
@@ -340,7 +375,6 @@
             sleep = (time) => {
               return new Promise(resolve => setTimeout(resolve, time));
             }
-            console.log('Calling apiQuery with sortBy: SEARCH_MATCH and page:', currentPage + 1);
             apiQuery(sortBy="SEARCH_MATCH",currentPage + 1);
             sleep(100);
           }

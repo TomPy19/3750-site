@@ -1,3 +1,10 @@
+/**
+ * This file displays information about a manga using data from the AniList API.
+ * It uses Handlebars.js to create templates for the banner and manga information.
+ * The information displayed includes the title, cover image, start and end dates, genres, average score, popularity, chapters, volumes, status, and description.
+ * The back button allows the user to return to the previous page.
+ */
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +58,7 @@
   </style>
 </head>
 <body>
+  // Banner handlebars template
   <script id="banner-template" type="text/x-handlebars-template">
     {{#if bannerImage}}
     <div class="banner">
@@ -59,7 +67,7 @@
     {{/if}}
   </script>
     
-  </div>
+  // Manga handlebars template
   <script id="manga-template" type="text/x-handlebars-template">
     <div class="body-content">
       {{#if title.english}}
@@ -88,11 +96,12 @@
   </script>
 </body>
 <script>
+  // Helper for checking if two values are equal
   $(document).ready(function() {
     Handlebars.registerHelper('equals', function(arg1, arg2) {
       return arg1 == arg2;
     });
-  // Create ajax request to https://graphql.anilist.co and display information about id from $_POST['id']
+  // Create ajax request to https://graphql.anilist.co and display information about id from $id
     $.post({
       url: 'https://graphql.anilist.co',
       dataType: 'json',
@@ -162,6 +171,7 @@
           title: title
         }
         $('body').append(template(context))
+        // Add back button below banner
         $('body').append('<button id="back-btn">Back</button>')
 
         // Use handlebars to create template for manga
