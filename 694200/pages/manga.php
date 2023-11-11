@@ -80,6 +80,7 @@
         <p>Chapters: {{chapters}}</p>
         <p>Volumes: {{volumes}}</p>
       {{/unless}}
+      <br>
       <p id='description'></p>
       <br>
       <br>

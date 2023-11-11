@@ -6,10 +6,6 @@ if (count($uris) > 2) {
   $id = $uris[2];
 }
 
-// echo "<pre>";
-// var_dump($uri);
-// echo "</pre>";
-
 include '../includes/header.html';
 
 if ($uri === '') {
