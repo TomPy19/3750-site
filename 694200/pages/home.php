@@ -191,7 +191,7 @@
   // JavaScript code to handle the single entry function and set cookie info.
   function clickHandler(id) {
     let sortBy = $('#sort-dropdown').val();
-    // 
+    // Set search value cookie if search field is not empty
     if ($('#search-field').val() != "") {
       sortBy = "SEARCH_MATCH";
       $.cookie('searchTerm', $('#search-field').val(), {path: '/'});
@@ -245,9 +245,6 @@
           variables: vars
         },
         success: function(resp) {
-          Handlebars.registerHelper('addOne', function(value) {
-            return value + 1;
-          });
           curPage = resp.data.Page.pageInfo.currentPage;
           if (curPage == 1) {
             $('#data').append('<div class="flex-grid"></div>')
