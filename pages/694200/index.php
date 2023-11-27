@@ -6,26 +6,11 @@
  
 <?php
 // Parse the query string to get the requested URI and ID (if any)
-// $uriString = explode('=', explode('&',$_SERVER['QUERY_STRING'])[1])[1];
-// $uris = explode('/', $uriString);
-// $uri = $uris[0];
-// if (count($uris) > 2) {
-//   $id = $uris[2];
-// }
-
-// echo '<pre>';
-// print_r($_SERVER);
-// echo '</pre>';
-
 $uriArr = explode('/', $_SERVER['REQUEST_URI']);
 $uri = $uriArr[2];
 if (count($uriArr) > 4) {
   $id = $uriArr[4];
 }
-
-// echo '<pre>';
-// print_r($uri);
-// echo '</pre>';
 
 // Route the request to the appropriate page
 if ($uri === '') {

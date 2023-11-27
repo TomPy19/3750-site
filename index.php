@@ -32,11 +32,11 @@
 
     if (!$found) {
       if ($matches = glob('./pages/' . $dir . '/*.html')) {
-        var_dump($matches);
-        $uri = $matches[0];
+        // var_dump(substr($matches[0], 7));
+        $uri = substr($matches[0], 7);
       } else if ($matches = glob('./pages/' . $dir . '/*.php')) {
-        var_dump($matches);
-        $uri = $matches[0];
+        // var_dump(substr($matches[0], 7));
+        $uri = substr($matches[0], 7);
       } else {
         $uri = '/pages/404.html';
       }
