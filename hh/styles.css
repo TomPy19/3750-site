@@ -61,6 +61,12 @@ section {
     color: #000;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .cta-button {
     display: inline-block;
     background-color: #ff6600;
@@ -87,3 +93,11 @@ footer {
 a {
     display: inline;
 }
+
+img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #000;
+    border-radius: 1rem;
+}
+
