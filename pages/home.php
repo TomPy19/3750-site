@@ -1,10 +1,8 @@
 <!doctype html>
 <html>
-
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./style.css">
-	<!--#include virtual="./includes/header-home.html" -->
 	<title>tgperso cpsc3750</title>
 </head>
 
@@ -18,9 +16,5 @@
 	<img src="now.jpg" id="big"></img>
 	<aside>Current picture of me and my beautiful girlfriend.</aside>
 </body>
-
-<!--#include virtual="./includes/footer.html" -->
-
-</html>
 
 </html>

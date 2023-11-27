@@ -4,4 +4,6 @@ Options Indexes FollowSymLinks Includes
 AddHandler server-parsed .html .htm
 
 RewriteEngine On
-RewriteRule ^694200/(.*)$ 694200/index.php?uri=$1 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
