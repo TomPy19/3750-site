@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: "Daft Punk";
-    src: url(Fonts/Daft.TTF);
+    src: url("Fonts/Daft.TTF");
     font-weight: normal;
     font-style: normal;
 }
