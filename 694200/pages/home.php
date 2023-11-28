@@ -3,11 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../style.css">
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-  <script src="https://kit.fontawesome.com/cd8cff598a.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     .body-content {
       display: flex;
@@ -106,6 +101,61 @@
       opacity: 0.5;
       cursor: pointer;
     }
+<<<<<<< Updated upstream:694200/pages/home.php
+=======
+    #about-btn {
+      font-weight: bold;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      margin-bottom: -3rem;
+      margin-left: 0rem;
+      border-radius: 5px;
+      border: none;
+      background-color: bisque;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    #about-btn:hover {
+      opacity: 0.5;
+    }
+    .acc-btns {
+      position: relative;
+      left: 0;
+      top: -3rem;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: -3rem;
+    }
+    .acc-btns button {
+      font-weight: bold;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      background-color: bisque;
+      cursor: pointer;
+    }
+
+    #sign-in {
+      background-color: #191F38;
+      border: 1px solid bisque;
+      color: bisque;
+    }
+    .acc-btns button:hover {
+      opacity: 0.5;
+    }
+    @media screen and (max-width: 1000px) {
+      .body-content {
+        width: 90%;
+      }
+    }
+    @media screen and (max-width: 800px) {
+      .body-content {
+        width: 100%;
+      }
+    }
+>>>>>>> Stashed changes:pages/694200/pages/home.php
     @media screen and (max-width: 730px) {
       input#search-field {
         margin-left: 2.5rem;
@@ -120,6 +170,14 @@
 </head>
 <body>
   <div class="body-content">
+<<<<<<< Updated upstream:694200/pages/home.php
+=======
+    <div class="acc-btns">
+      <button id="sign-in">Sign in</button>
+      <button id="sign-up">Sign up</button>
+    </div>
+    <button id="about-btn">About</button>
+>>>>>>> Stashed changes:pages/694200/pages/home.php
     <span id="entries"></span>
     <div class="input-container">
       <div class="search">
@@ -220,6 +278,7 @@
       apiQuery(sortBy="SEARCH_MATCH");
     })
 
+<<<<<<< Updated upstream:694200/pages/home.php
     if ($.cookie('sortBy')) {
       if ($.cookie('searchTerm')) {
         $('#search-field').val($.cookie('searchTerm'));
@@ -239,6 +298,18 @@
       $('#search-option').hide();
       apiQuery(sortBy=$(this).val());
     })
+=======
+    $('#sign-in').on('click', function() {
+      window.location.href = `sign-in`;
+    })
+
+    $('#sign-up').on('click', function() {
+      window.location.href = `sign-up`;
+    })
+
+    // Hide search option
+    $('#search-option').hide();
+>>>>>>> Stashed changes:pages/694200/pages/home.php
     
     function apiQuery(sortBy, page=1) {
       let searchTerm = "";

@@ -6,42 +6,41 @@
 
 
   <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="./style.css">
-  <!--#include virtual="../includes/header.html" -->
+  <link rel="stylesheet" href="../pages/496548/style.css">
 
   <style>
     .labels {
       display: inline;
     }
-
-    .flex-labels {
-
-    }
   </style>
 </head>
 
 <body>
-  <div class="flex-labels">
-    <p class="labels">RED counter: </p>
-    <p class="labels" id="red-color-count">0</p>
-    <p class="labels">GREEN counter: </p>
-    <p class="labels" id="green-color-count">0</p>
-    <p class="labels">BLUE counter: </p>
-    <p class="labels" id="blue-color-count">0</p><br>
-  </div>
+  <div class="site-content">
+    <div class="flex-labels">
+      <p class="labels">RED counter: </p>
+      <p class="labels" id="red-color-count">0</p>
+      <p class="labels">GREEN counter: </p>
+      <p class="labels" id="green-color-count">0</p>
+      <p class="labels">BLUE counter: </p>
+      <p class="labels" id="blue-color-count">0</p><br>
+    </div>
 
+    <div class="flex-labels">
+      <button class="red">RED</button>
+      <button class="green">GREEN</button>
+      <button class="blue">BLUE</button><br>
+    </div>
 
-  <button class="red">RED</button>
-  <button class="green">GREEN</button>
-  <button class="blue">BLUE</button><br>
-
-  <p class="labels">Inverse Counter: </p>
-  <p class="labels" id="red-inv-count">0</p>
-  <p class="labels">Inverse Counter: </p>
-  <p class="labels" id="green-inv-count">0</p>
-  <p class="labels">Inverse Counter: </p>
-  <p class="labels" id="blue-inv-count">0</p>
-
+    <div class="flex-lables">
+      <p class="labels">Inverse Counter: </p>
+      <p class="labels" id="red-inv-count">0</p>
+      <p class="labels">Inverse Counter: </p>
+      <p class="labels" id="green-inv-count">0</p>
+      <p class="labels">Inverse Counter: </p>
+      <p class="labels" id="blue-inv-count">0</p>
+    </div>
+    
   </div>
 </body>
 
@@ -62,7 +61,7 @@
       this.style.color = "white" :
       this.style.color = "black";
     let count = document.getElementById(`${this.className}-inv-count`);
-    count.innerHtml += 1;
+    count.innerHtml = count.innerHTML++;
   }
 
   const buttons = document.getElementsByTagName("button")
