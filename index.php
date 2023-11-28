@@ -1,17 +1,17 @@
 <?php
   $uri = str_replace('/3750-site', '', $_SERVER['REQUEST_URI']);
-
-  ?>
-  <head>
-    <title>3750 Site</title>
-    <link rel="stylesheet" href="./includes/header.css">
-  </head>
-  <script>
-    console.log('<?= $uri ?>');
-  </script>
-  <?php
-  include './includes/header.html';
-
+  if (explode('/', $uri)[2] != 'api') {
+    ?>
+    <head>
+      <title>3750 Site</title>
+      <link rel="stylesheet" href="./includes/header.css">
+    </head>
+    <script>
+      // console.log('<? //$uri ?>');
+    </script>
+    <?php
+    include_once './includes/header.html';
+  }
   if ($uri == '/') {
     require ('./pages/home.php');
   } else if (explode('/', $uri)[1] == '694200') {

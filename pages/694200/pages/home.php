@@ -252,19 +252,6 @@
       window.location.href = `about`;
     })
 
-    if ($.cookie('sortBy')) {
-      if ($.cookie('searchTerm')) {
-        $('#search-field').val($.cookie('searchTerm'));
-      } else {
-        $('#sort-dropdown').val($.cookie('sortBy'));
-      }
-
-      apiQuery(sortBy=$.cookie('sortBy'));
-    } else {
-      $('#sort-dropdown').val("");
-      apiQuery(trendArr);
-    }
-
     $('#sort-dropdown').on('change', function() {
       $('#data').empty();
       $('#search-field').val("");
