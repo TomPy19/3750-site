@@ -1,0 +1,89 @@
+body,
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+    padding: 5;
+}
+
+html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: #333;
+    padding: .5% 0;
+    height: 1%;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+    padding-inline-start: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav a {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px;
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.content,
+.mission,
+section {
+    width: 80%;
+    max-width: 800px;
+    min-height: 1300px;
+    height: 100%;
+    margin: 1.5% auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+    color: #000;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: .5% 0;
+    box-shadow: 0 50vh 0 50vh #333;
+}
+
+.job-advertisement {
+    text-align: left;
+}
+
+.job-advertisement h4,
+a {
+    display: inline;
+}

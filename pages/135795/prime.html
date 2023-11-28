@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="prime.css">
+  <title>Prime Numbers</title>
+  <link rel="stylesheet" href="../style.css">
+  <!--#include virtual="../includes/header.html" -->
+</head>
+
+<body>
+  <h1>Prime Numbers JS Demo</h1>
+  <div class="container">
+    <div class="input-container">
+      <input type="text" id="number-input" placeholder="Enter Number" onkeypress="enterSubmit(event)" onsubmit="return false;">
+      <button style="display:inline" id="start-button" onclick="startClick()">START</button>
+    </div>
+    <div class="prime-content">
+      <div class="prime-list">
+        <h2>Prime Numbers</h2>
+        <hr>
+        <ul id="prime-numbers"></ul>
+        <div class="inline" display="inline">
+          <button onclick="calcSum('prime')">SUM</button>
+          <p class="sum" id="nonP-total">Total: 0</p>
+        </div>
+      </div>
+      <div class="non-prime-list">
+        <h2>Non-Prime Numbers</h2>
+        <hr>
+        <ul id="non-prime-numbers">
+        </ul>
+        <div class="inline" display="inline">
+          <button onclick="calcSum('nonPrime')">SUM</button>
+          <p class="sum" id="p-total">Total: 0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="prime.js"></script>
+</body>
+
+</html>

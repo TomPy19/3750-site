@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Audio Demo</title>
+    <link rel="stylesheet" href="../style.css">
+    <!--#include virtual="../includes/header.html" -->
+  </head>
+  <body>
+    <h1>Audio Object Demo</h1>
+    <h3 style="margin-bottom:0">Rick Astley - Never Gonna Give You Up</h3>
+    <audio id="audio" controls="" src="./audio.mp3" type="audio/mpeg"></audio><br>
+    <button id="show-hide">Click</button> here to show/hide default controls.
+    <br>
+    <div>Play/Pause:  <button id="play-pause">Play</button></div>
+    <div>Current Time:  <p style="display: inline;" id="time-text">0:00/0:00</p></div>
+    <div>Volume: <p style="display: inline;" id="vol-percent"></p><br>
+      <input id="vol-slider" type="range" value="10">
+    </div>
+    
+
+    <script>
+      var playing = false;
+      var shown = false;
+      audio = document.getElementById("audio");
+      audio.controls = false;
+      timeText = document.getElementById("time-text");
+      volSlider = document.getElementById("vol-slider")
+      volPercent = document.getElementById("vol-percent");
+      setVolPer();
+      showHide = document.getElementById("show-hide");
+      defaultCon = document.getElementById("default-con");
+      audio.volume = .1;
+
+      playPause = document.getElementById("play-pause");
+      playPause.onclick = () => {
+        if (!playing) {
+          audio.play();
+          playing = true;
+          playPause.innerHTML = "Pause";
+        } else {
+          audio.pause();
+          playing = false;
+          playPause.innerHTML = "Play";
+        }
+      }
+      audio.oncanplay = timeDisplay;
+      audio.ontimeupdate = timeDisplay;
+      audio.onplay = ()=>{playing=true;playPause.innerHTML = "Pause";};
+      audio.onpause = ()=>{playing=false;playPause.innerHTML = "Play";};
+
+      function timeDisplay() {
+        var cSecs = parseInt(audio.currentTime);
+        var tSecs = parseInt(audio.duration);
+        var rn = parseInt(cSecs/60)+":"+String(cSecs%60).padStart(2,'0');
+        var end = parseInt(tSecs/60)+":"+String(tSecs%60).padStart(2,'0');
+        timeText.innerHTML = rn+"/"+end;
+      }
+
+      showHide.onclick = () => {
+        if (!shown) {
+          defaultCon.innerHTML = "";
+        } else {
+          defaultCon.innerHTML = "";
+        }
+      }
+
+      volSlider.oninput = setVolPer;
+      
+      showHide.onclick = ()=>{!audio.controls?audio.controls=true:audio.controls=false}
+
+      function setVolPer() {
+        audio.volume = volSlider.value/100;
+        volPercent.innerHTML=volSlider.value+"%";
+      }
+    </script>
+
+  </body>
+</html>

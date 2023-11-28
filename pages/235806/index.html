@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON and AJAX</title> <!-- Title -->
+  <link rel="stylesheet" href="./style.css"> <!-- Link to a local stylesheet -->
+  <link rel="stylesheet" href="../style.css"> <!-- Link to another stylesheet in a parent directory -->
+  <!--#include virtual="../includes/header.html" --> <!-- Commented out server-side include (SSI) for including external content -->
+</head>
+<body>
+  <header>
+    <h1 id="header">JSON and AJAX</h1> <!-- Main header -->
+    <button id="btn">Fetch Info for 3 New Animals</button> <!-- Button to trigger data fetching -->
+  </header>
+
+  <div id="animal-info"></div> <!-- Container to display fetched JSON data -->
+
+  <script type="text/x-handlebars-template">
+    {{#each animals}}
+    <p>{{name}} is a {{species}} that likes to eat 
+      {{#each foods.likes}}{{this}}
+        {{#unless @last}} and 
+        {{/unless}}
+      {{/each}} and dislikes 
+      {{#each foods.dislikes}}{{this}}
+        {{#unless @last}} and 
+        {{/unless}}
+      {{/each}}.</p>
+    {{/each}}
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="./ajax.js"></script> <!-- Reference to JavaScript file -->
+</body>
+</html>

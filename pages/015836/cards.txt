@@ -1,0 +1,117 @@
+index.html:
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>JavaScript Business Cards</title>
+  <link rel="stylesheet" href="../style.css" type="text/css">
+  <style>
+    #show-all {
+      margin-bottom:5px;
+    }
+    #all-cards {
+      margin-bottom:0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>JavaScript Business Cards</h1>
+  <div class="flex-content" style="display:flex;width:100%">
+  <div class="form-div" style="width: 50%;">
+  <h3>Add New Card</h3>
+  <form id="card-form" onSubmit="return false;">
+    Name: <input id="name" type="text" onkeypress="clickbutton(event)"><br>
+    Email: <input id="email" type="text" onkeypress="clickbutton(event)"><br>
+    Address: <input id="address" type="text" onkeypress="clickbutton(event)"><br>
+    Phone: <input id="phone" type="text" onkeypress="clickbutton(event)"><br>
+    Birthdate: <input id="birthdate" type="date" onkeypress="clickbutton(event)"><br>
+    <button id="form-submit" onSubmit="return false;">Submit</button>
+  </form>
+  </div>
+  <div id="cards-div" style="width: 50%;">
+  <label for=""></label><h3 name="all-cards" id="all-cards">All Cards</h3>
+  <button id="show-all">Show all</button>
+  <div id="end"></div>
+  </div>
+  </div>
+  <script type="text/javascript">
+    clickbutton = (event)=>{
+      if(event.keyCode===13) {
+        event.preventDefault();
+        document.getElementById("form-submit").click();
+      }
+    }
+  </script>
+  <script type="module" src="cards.js"> </script>
+  <script type="module" src="loops.js"> </script>
+</body>
+
+</html>
+
+
+cards.js:
+
+var formBtn = document.getElementById("form-submit");
+formBtn.onclick = (event)=>{
+   event.preventDefault();
+   new Card(
+      document.getElementById("name").value,
+      document.getElementById("email").value,
+      document.getElementById("address").value,
+      document.getElementById("phone").value,
+      document.getElementById("birthdate").value
+   ).printCard();
+   return false;
+}
+
+// define the functions
+function printCard() {
+   var cardDiv = document.getElementById("cards-div");
+   var newDiv = document.createElement("div");
+   newDiv.style="border:1px solid;";
+   var nameLine = "<strong>Name: </strong>" + this.name + "<br>";
+   var emailLine = "<strong>Email: </strong>" + this.email + "<br>";
+   var addressLine = "<strong>Address: </strong>" + this.address + "<br>";
+   var phoneLine = "<strong>Phone: </strong>" + this.phone + "<br>";
+   var birthdateLine = "<strong>Birthdate: </strong>" + this.birthdate;
+   newDiv.innerHTML+=nameLine+emailLine+addressLine+phoneLine+birthdateLine;
+   cardDiv.insertBefore(newDiv, document.getElementById("show-all").nextSibling);
+}
+
+function Card(name,email,address,phone,birthdate) {
+   this.name = name;
+   this.email = email;
+   this.address = address;
+   this.phone = phone;
+   this.birthdate = birthdate;
+   this.printCard = printCard;
+}
+
+// Create the objects
+function genCardArr() {
+   var cards = new Array();
+   var sue = new Card("Sue Suthers", "sue@suthers.com", "123 Elm Street, Yourtown ST 99999", "555-555-9876", "07/19/2001");
+   cards[0] = sue;
+   var fred = new Card("Fred Fanboy", "fred@fanboy.com", "233 Oak Lane, Sometown ST 99399", "555-555-4444", "03/23/1973");
+   cards[1] = fred;
+   var jimbo = new Card("Jimbo Jones", "jimbo@jones.com", "233 Walnut Circle, Anotherville ST 88999", "555-555-1344", "08/04/1975");
+   cards[2] = jimbo;
+   return cards;
+}
+
+export {genCardArr}
+
+
+loops.js:
+
+import {genCardArr} from "./cards.js";
+
+var showBtn = document.getElementById("show-all");
+showBtn.onclick = () => {
+  showBtn.disabled = true;
+  var names = genCardArr();
+  for (var i=0; i < names.length; i++) names[i].printCard();
+}

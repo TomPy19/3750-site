@@ -1,0 +1,10 @@
+AddType text/html .shtml
+AddHandler server-parsed .shtml
+Options Indexes FollowSymLinks Includes
+AddHandler server-parsed .html .htm
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php
+RewriteRule ^/694200/(.*)$ pages/694200/index.php [L]
