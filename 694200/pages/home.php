@@ -101,8 +101,6 @@
       opacity: 0.5;
       cursor: pointer;
     }
-<<<<<<< Updated upstream:694200/pages/home.php
-=======
     #about-btn {
       font-weight: bold;
       padding: 0.5rem;
@@ -155,7 +153,6 @@
         width: 100%;
       }
     }
->>>>>>> Stashed changes:pages/694200/pages/home.php
     @media screen and (max-width: 730px) {
       input#search-field {
         margin-left: 2.5rem;
@@ -170,14 +167,11 @@
 </head>
 <body>
   <div class="body-content">
-<<<<<<< Updated upstream:694200/pages/home.php
-=======
     <div class="acc-btns">
       <button id="sign-in">Sign in</button>
       <button id="sign-up">Sign up</button>
     </div>
     <button id="about-btn">About</button>
->>>>>>> Stashed changes:pages/694200/pages/home.php
     <span id="entries"></span>
     <div class="input-container">
       <div class="search">
@@ -278,7 +272,6 @@
       apiQuery(sortBy="SEARCH_MATCH");
     })
 
-<<<<<<< Updated upstream:694200/pages/home.php
     if ($.cookie('sortBy')) {
       if ($.cookie('searchTerm')) {
         $('#search-field').val($.cookie('searchTerm'));
@@ -298,7 +291,6 @@
       $('#search-option').hide();
       apiQuery(sortBy=$(this).val());
     })
-=======
     $('#sign-in').on('click', function() {
       window.location.href = `sign-in`;
     })
@@ -309,7 +301,6 @@
 
     // Hide search option
     $('#search-option').hide();
->>>>>>> Stashed changes:pages/694200/pages/home.php
     
     function apiQuery(sortBy, page=1) {
       let searchTerm = "";
