@@ -41,4 +41,6 @@ if ($uri === '') {
   require './pages/694200/pages/sign-in.php';
 } else if ($uri === 'sign-up') {
   require './pages/694200/pages/sign-up.php';
+} else if ($uri === 'favorites') {
+  require './pages/694200/pages/favorites.php';
 }

@@ -81,18 +81,28 @@
         data: $(this).serialize(),
         success: function(data) {
           data = JSON.parse(data).message;
-          // console.log(data);
+          // console.log(data.substring(0,5));
           // first = data.name.split(' ')[0];
           // alert(`Hello ${first}!`)
-          if (data == 'Error: Incorrect email or password.') {
-            alert(data);
+          if (typeof data == "string") {
+            if (data.substring(0,5) == 'Error') {
+              alert(data);
+            }
           } else {
+            console.log(data);
             $('button').text('Success!')
             $('#placeholder').text('Redirecting...')
+            $.cookie('login', true, {path: '/'})
+            $.cookie('user', data.userID, {path: '/'})
+            nameArr = data.name.split(' ')
+            $.cookie('f_name', nameArr[0], {path: '/'})
+            $.cookie('l_name', nameArr[1], {path: '/'})
+            // console.log(data.name);
+            // console.log(window.history)
             setTimeout(() => {
               window.location.href = '/694200/';
             }, 1500);
-          }
+          }  
         }
       });
     });

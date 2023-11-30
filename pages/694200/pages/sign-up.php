@@ -73,7 +73,7 @@
         success: function(data) {
           data = JSON.parse(data)
           if (data.message == 'User created successfully.') {
-            window.location.href = '/694200/pages/sign-in';
+            window.location.href = 'sign-in';
           } else {
             alert(data.message);
           }

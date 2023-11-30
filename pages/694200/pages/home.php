@@ -1,4 +1,5 @@
-<!-- /**
+<?php
+  /**
  * This file contains the HTML and JavaScript code for a manga search app.
  * The app allows users to search for manga titles and sort them by various criteria.
  * The app uses the AniList GraphQL API to fetch manga data.
@@ -15,174 +16,15 @@
  * - Display the total number of manga entries available on the AniList site
  * - Implement infinite scrolling to load more manga titles as the user scrolls down the page
  * - Display an "About" button that links to an about page for the app
- */ -->
+ */
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    .body-content {
-      display: flex;
-      width: 70%;
-      margin: 0 auto;
-      flex-direction: column;
-      align-items: center;
-    }
-    #data {
-      width: 100%;
-    }
-    table {
-      border-collapse: collapse;
-    }
-    table, th, td {
-      border: 1px solid bisque;
-      width: 100%;
-    }
-    th, td {
-      padding: 5px;
-      width: fit-content;
-    }
-    img {
-      width: 100px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    span#entries {
-      font-size: 1.5rem;
-      margin: 1rem;
-      align-self: flex-end;
-    }
-    div.search {
-      display: flex;
-      justify-items: center;
-    }
-    #search-form {
-      display: flex;
-      flex-wrap: none;
-    }
-    button#search-btn {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-      position: relative;
-      font-size: 1.25rem;
-      left: -2rem;
-      top: -.15rem;
-    }
-    input#search-field {
-      padding: 0.5rem;
-      border: 1px solid black;
-      border-radius: 5px;
-      margin-left: 0;
-    }
-    input#search-field:focus {
-      outline: none;
-    }
-    input#search-field::placeholder {
-      font-style: italic;
-    }
-    select#sort-dropdown {
-      border: 1px solid black;
-      border-radius: 5px;
-    }
-    .input-container {
-      display: flex;
-      width: 100%;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    label {
-      margin-left: .5rem;
-    }
-    .flex-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      grid-gap: 1rem;
-    }
-    .flex-item {
-      text-align: center;
-    }
-    #page, #last-page {
-      display: none;
-    }
-    .flex-item p {
-      font-size: 1rem;
-      margin: 0;
-    }
-    .flex-item img:hover {
-      opacity: 0.5;
-      cursor: pointer;
-    }
-    .flex-item p:hover {
-      opacity: 0.5;
-      cursor: pointer;
-    }
-    #about-btn {
-      font-weight: bold;
-      padding: 0.5rem;
-      margin: 0.5rem;
-      margin-bottom: -3rem;
-      margin-left: 0rem;
-      border-radius: 5px;
-      border: none;
-      background-color: bisque;
-      cursor: pointer;
-      align-self: flex-start;
-    }
-    #about-btn:hover {
-      opacity: 0.5;
-    }
-    .acc-btns {
-      position: relative;
-      left: 0;
-      top: -3rem;
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-      margin-bottom: -3rem;
-    }
-    .acc-btns button {
-      font-weight: bold;
-      padding: 0.5rem;
-      margin: 0.5rem;
-      border-radius: 5px;
-      border: none;
-      background-color: bisque;
-      cursor: pointer;
-    }
-
-    #sign-in {
-      background-color: #191F38;
-      border: 1px solid bisque;
-      color: bisque;
-    }
-    .acc-btns button:hover {
-      opacity: 0.5;
-    }
-    @media screen and (max-width: 1000px) {
-      .body-content {
-        width: 90%;
-      }
-    }
-    @media screen and (max-width: 800px) {
-      .body-content {
-        width: 100%;
-      }
-    }
-    @media screen and (max-width: 730px) {
-      input#search-field {
-        margin-left: 2.5rem;
-      }
-      .input-container {
-        gap: 0.5rem;
-        justify-content: center;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../pages/694200/styles.css">
   <title>Collect App</title>
 </head>
 <body>
@@ -225,6 +67,7 @@
     <span id="last-page">0</span>
     <span id="data"></span>
   </div>
+  
 </body>
 <script>
   // JavaScript code to handle the single entry function and set cookie info.
@@ -247,6 +90,20 @@
     // Boolean to call function with double async
     let isLoading = false;
 
+    if ($.cookie('login')) {
+      $('.acc-btns').empty();
+      $('.acc-btns').append(/*html*/`<button id="favorites"><i class='fas fa-heart'></button>`);
+      $('.acc-btns').append(/*html*/`<button id="account"><i class='fas fa-user'></button>`);
+      $('.acc-btns').append(/*html*/`<button id="sign-out">Sign out</button>`);
+      $('.acc-btns').append(/*html*/`<div class="floating-acc-menu" style="display:none;transition:all,0.3s">
+        <p>Welcome ${$.cookie('f_name')}</p>
+        </div>`)
+    }
+
+    $('#favorites').on('click', function() {
+      window.location.href = `favorites`;
+    })
+
     // JavaScript code to handle the about button.
     $('#about-btn').on('click', function() {
       window.location.href = `about`;
@@ -258,6 +115,7 @@
       $('#search-option').hide();
       apiQuery(sortBy=$(this).val());
     })
+
     $('#sign-in').on('click', function() {
       window.location.href = `sign-in`;
     })
@@ -265,6 +123,24 @@
     $('#sign-up').on('click', function() {
       window.location.href = `sign-up`;
     })
+
+    $('#sign-out').on('click', function() {
+      $.removeCookie('login', {path: '/'});
+      $.removeCookie('user', {path: '/'});
+      $.removeCookie('f_name', {path: '/'});
+      $.removeCookie('l_name', {path: '/'});
+      $.removeCookie('sortBy', {path: '/'});
+      window.location.reload();
+    })
+
+    $('#account').on('click', function() {
+      if ($('.floating-acc-menu').css('display') == 'block')
+        $('.floating-acc-menu').css('display', 'none');
+      else if ($('.floating-acc-menu').css('display') == 'none') {
+        $('.floating-acc-menu').css('display', 'block');
+      }
+    })
+
 
     // Hide search option
     $('#search-option').hide();
@@ -304,10 +180,13 @@
           }
 
           // Create Handlebars template
-          let template = Handlebars.compile(`
+          let template = Handlebars.compile(/*html*/`
             {{#each media}}
-              <div class="flex-item">
-                <img onclick=clickHandler({{id}}) src="{{coverImage.extraLarge}}" alt="{{#if title.english}}{{title.english}}{{else}}{{title.romaji}}{{/if}}">
+              <div class="flex-item" value={{id}}>
+                <div class="img-container">
+                  <button class="fas fav-btn fa-heart"></button>
+                  <img onclick=clickHandler({{id}}) src="{{coverImage.extraLarge}}" alt="{{#if title.english}}{{title.english}}{{else}}{{title.romaji}}{{/if}}">
+                </div>
                 {{#if title.english}}
                   <p onclick=clickHandler({{id}})>{{title.english}}</p>
                 {{else}}
@@ -319,6 +198,79 @@
           $('.flex-grid').append(template(resp.data.Page))
           $('#page').text(resp.data.Page.pageInfo.currentPage);
           $('#last-page').text(resp.data.Page.pageInfo.lastPage);
+          if ($.cookie('login')) {
+            $.post({
+              url: '/694200/api/getFavorites',
+              data: {
+                userID: $.cookie('user'),
+              },
+              success: function(data) {
+                data = JSON.parse(data).message;
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                  $(`[value=${data[i].mangaID}]`).children('div').children('button').css('color', 'red');
+                  $(`[value=${data[i].mangaID}]`).children('div').children('button').css('display', 'block');
+                }
+              }
+            })
+            $('.fav-btn').on('click', function() {
+              if ($(this).css('color') == 'rgb(255, 255, 255)') {
+                // console.log($(this).parent().parent().attr('value'));
+                $.post({
+                  url: '/694200/api/addToFavorites',
+                  data: {
+                    userID: $.cookie('user'),
+                    mangaID: $(this).parent().parent().attr('value'),
+                  },
+                  success: function(data) {
+                    data = JSON.parse(data).message;
+                    console.log(data);
+                  }
+                })
+                $(this).css('color', 'red');
+              }
+              else if ($(this).css('color') == 'rgb(255, 0, 0)') {
+                $.post({
+                  url: '/694200/api/rmFromFavorites',
+                  data: {
+                    userID: $.cookie('user'),
+                    mangaID: $(this).parent().parent().attr('value'),
+                  },
+                  success: function(data) {
+                    data = JSON.parse(data).message;
+                    console.log(data);
+                  }
+                })
+                $(this).css('color', 'white');
+              }
+            })
+          
+            $('.img-container > img').on('mouseenter', function() {
+              $(this).css('opacity', '0.5');
+              if ($(this).parent().children('button').css('color') == 'rgb(255, 255, 255)') {
+                $(this).parent().children('button').css('display', 'block');
+              }
+            })
+            $('.img-container > img').on('mouseleave', function() {
+              $(this).css('opacity', '1');
+              if ($(this).parent().children('button').css('color') == 'rgb(255, 255, 255)') {
+                $(this).parent().children('button').css('display', 'none');
+              }
+            })
+            $('.img-container > button').on('mouseenter', function() {
+              $(this).css('display', 'block');
+              $(this).siblings('img').css('opacity', '0.5');
+            })
+            $('.fav-btn').each(function() {
+              if ($(this).css('color') == 'rgb(255, 255, 255)') {
+                $(this).css('display', 'none');
+              } else {
+                $(this).css('display', 'block');
+              }
+            })
+          } else {
+            $('.fav-btn').css('display', 'none');
+          }
           isLoading = false;
         }
       })
@@ -433,6 +385,7 @@
         }
       }
     });
+
   });
 </script>
 </html>
