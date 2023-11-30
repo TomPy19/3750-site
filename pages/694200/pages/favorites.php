@@ -32,7 +32,10 @@
       <div class="sort">
         <label for="sort-dropdown">Sort By:</label>
         <select name="sort-dropdown" id="sort-dropdown">
-          <option value=''>Date Added</option>
+          <option value='date-added-asc'>Date Added ↓</option>
+          <option value='date-added-dec'>Date Added ↑</option>
+          <option value="alph-a-z">Alphabetical (A-Z)</option>
+          <option value="alph-z-a">Alphabetical (Z-A)</option>
         </select>
       </div>
     </div>
@@ -83,6 +86,13 @@
     $('#home').click(function () {
       window.location.href = '/694200/';
     })
+    if ($.cookie('sortby')) {
+      $('#sort-dropdown').val($.cookie('sortby'));
+    }
+    $('#sort-dropdown').change(function() {
+      $.cookie('sortby', $(this).val(), {path: '/'});
+      window.location.reload()
+    })
     $.post({
       url: '/694200/api/getFavorites',
       data: {
@@ -90,11 +100,41 @@
       },
       success: function(data) {
         data = JSON.parse(data).message
-        console.log(data)
         let ids = [];
         for (var i = 0; i < data.length; i++) {
           ids.push(data[i].mangaID)
         }
+        if (ids.length == 0) {
+          $('.flex-grid').append(/*html*/`
+            <div class="flex-item">
+              <p>You have no favorites!</p>
+            </div>
+          `)
+          return;
+        } else {
+          if ($('#sort-dropdown').val() == 'alph-a-z' || $('#sort-dropdown').val() == 'alph-z-a') {
+            query = `
+              query ($ids: [Int]) {
+                Page (page:1,perPage:100) {
+                  media(type:MANGA,id_in:$ids,sort:TITLE_ENGLISH) {
+                    id
+                    title {
+                        english
+                        romaji
+                    }
+                    coverImage {
+                        extraLarge
+                    }
+                  }
+                }
+              }
+            `;
+          } else if ($('#sort-dropdown').val() == 'date-added-asc') {
+            ids = ids.reverse();
+          }
+        }
+        console.log($('#sort-dropdown').val())
+        console.log(ids)
         $.post({
           url: 'https://graphql.anilist.co',
           datatype: 'json',
@@ -106,6 +146,19 @@
           },
           success: function(data) {
             console.log(data)
+            if ($('#sort-dropdown').val() == 'date-added-asc' || $('#sort-dropdown').val() == 'date-added-dec') {
+              temp = []
+              for (var i = 0; i < ids.length; i++) {
+                for (var j = 0; j < data.data.Page.media.length; j++) {
+                  if (data.data.Page.media[j].id == ids[i]) {
+                    temp.push(data.data.Page.media[j])
+                  }
+                }
+              }
+              data.data.Page.media = temp;
+            } else if ($('#sort-dropdown').val() == 'alph-z-a') {
+              data.data.Page.media = data.data.Page.media.reverse();
+            }
             let template = Handlebars.compile(/*html*/`
               {{#each media}}
                 <div class="flex-item" value={{id}}>

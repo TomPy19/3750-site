@@ -112,7 +112,7 @@
             }
           } else {
             console.log(data);
-            $('button').text('Success!')
+            $('#sign-in button').text('Success!')
             $('#placeholder').text('Redirecting...')
             $.cookie('login', true, {path: '/'})
             $.cookie('user', data.userID, {path: '/'})

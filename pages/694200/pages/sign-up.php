@@ -80,7 +80,7 @@
     <button id="back-btn">Back</button>
     <form id="sign-up">
       <h1>Sign Up</h1>
-      <label for="name">Full Name</label>
+      <label for="name">First Last Name</label>
       <input type="text" name="name" id="name">
       <label for="email">Email</label>
       <input type="text" name="email" id="email">
@@ -98,6 +98,14 @@
     });
     $('#sign-up').on('submit', function(e) {
       e.preventDefault();
+      if ($('#name').val() == '' || $('#email').val() == '' || $('#password').val() == '') {
+        alert('Please fill out all fields.');
+        return;
+      }
+      if ($('#name').val().split(' ').length != 2) {
+        alert('Please enter your first and last name.');
+        return;
+      }
       $.post({
         url: '/694200/api/sign-up',
         data: $(this).serialize(),
