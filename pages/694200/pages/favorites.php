@@ -20,15 +20,9 @@
   <h1 id=title></h1>
   <div class="body-content">
     <div class="acc-btns"></div>
-    <button id="about-btn">About</button>
     <div class="input-container">
-      <div class="search">
-        <form id="search-form">
-          <input type="text" name="search-field" id="search-field" placeholder="Search...">
-          <button type="submit" id="search-btn"><i class="fas fa-search" style="position:relative;top: 1.5px;"></i></button>
-        </form>
-      </div>
       <!-- Dropdown for sorting data -->
+      <button id="about-btn">About</button>
       <div class="sort">
         <label for="sort-dropdown">Sort By:</label>
         <select name="sort-dropdown" id="sort-dropdown">
@@ -45,6 +39,12 @@
   </div>
 </body>
 <script>
+  function clickHandler(id) {
+    let sortBy = $('#sort-dropdown').val();
+    $.cookie('sortby', sortBy, {path: '/'});
+    window.location.href = `manga/id/${id}`;
+  }
+
   $(document).ready(function () {
     if (!$.cookie('login')) {
       window.location.href = '/694200/sign-in';
@@ -65,6 +65,9 @@
         }
       }
     `;
+    $('#about-btn').on('click', function() {
+      window.location.href = '/694200/about';
+    })
     $('#data').append('<div class="flex-grid"></div>');
     if ($.cookie('login')) {
       $('.acc-btns').append(/*html*/`<button id="home"><i class='fas fa-home'></button>`);
