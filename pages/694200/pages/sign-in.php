@@ -10,9 +10,8 @@
   <title>Sign In</title>
   <style>
     body {
-      display: grid;
-      align-items: start;
-      justify-items: stretch;
+      display: flex;
+      flex-direction: column;
     }
     #sign-in {
       display: flex;
@@ -21,10 +20,7 @@
       flex-direction: column;
       width: fit-content;
       border: 1px solid bisque;
-      margin: 0 auto;
       border-radius: .5rem;
-      position: relative;
-      top: -2rem;
     }
     #sign-in label {
       margin-top: .5rem;
@@ -59,21 +55,47 @@
       margin-top: 1rem;
       padding: 0;
     }
+    #back-btn {
+      font-size: 1.5rem;
+      padding: 1rem;
+      border-radius: 5px;
+      border: none;
+      background-color: bisque;
+      cursor: pointer;
+      width: fit-content;
+      margin: 1rem;
+      margin-top: 0;
+    }
+    .content-wrapper {
+      margin: 0 auto;
+      margin-top: 10rem;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      width: 30%;
+      justify-content: flex-start;
+    }
   </style>
 </head>
 <body>
-  <form id="sign-in">
-    <h1>Sign In</h1>
-    <label for="email">Email</label>
-    <input type="text" name="email" id="email">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password">
-    <button type="submit">Sign in</button>
-    <p id="placeholder">‎</p>
-  </form>
+  <div class="content-wrapper">
+    <button id="back-btn">Back</button>
+    <form id="sign-in">
+      <h1>Sign In</h1>
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password">
+      <button type="submit">Sign in</button>
+      <p id="placeholder">‎</p>
+    </form>
+  </div>
 </body>
 <script>
   $(document).ready(function() {
+    $('#back-btn').click(function() {
+      window.history.back();
+    });
     $('#sign-in').submit(function(e) {
       e.preventDefault();
       $.post({
