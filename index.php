@@ -30,6 +30,8 @@
     require ('./pages/home.php');
   } else if (explode('/', $uri)[1] == '694200') {
     require ('./pages/694200/index.php');
+  } else if (explode('/', $uri)[2] == 'api') {
+    require ('./pages' . $uri . '.php'); 
   } else {
     $dir = explode('/', $uri)[1];
     // echo $dir;
